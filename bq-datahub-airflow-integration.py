@@ -24,7 +24,7 @@ BQ_LINEAGE = f'''
             split(destinationTable, ".")[SAFE_OFFSET(1)] destination_dataset,
             split(destinationTable, ".")[SAFE_OFFSET(2)] destination_table,
             split(src, ".")[SAFE_OFFSET(1)] source_dataset, split(src, ".")[SAFE_OFFSET(2)] source_table,
-        from `datascience-222717.fnd_audit_bq.queries`, unnest(split(sourceTables, ",")) src
+        from `{BQ_PROJECT}.fnd_audit_bq.queries`, unnest(split(sourceTables, ",")) src
         where principalEmail in ('{SVC_ACCOUNT}') # service accounts used by Airflow
         and split(destinationTable, ".")[SAFE_OFFSET(0)] = '{BQ_PROJECT}'
         and destinationTable != sourceTables # for delete statements
